@@ -17,6 +17,9 @@ def probe(out_file):
         except requests.exceptions.MissingSchema:
             bad_urls.append(link)
             continue
+        except requests.exceptions.ConnectionError:
+            bad_urls.append(link)
+            continue
 
     with open(out_file, 'w') as file:
         file.write('\n'.join(res_urls))
